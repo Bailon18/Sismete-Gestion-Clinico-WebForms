@@ -14,9 +14,12 @@
             vertical-align: top;
             border-top: 1px solid #dee2e6;
         }
+
+     
         .table thead th {
             vertical-align: bottom;
             border-bottom: 2px solid #dee2e6;
+            color: white !important; 
         }
         .table tbody + tbody {
             border-top: 2px solid #dee2e6;
@@ -79,14 +82,15 @@
                        
                         <asp:GridView ID="gvAtenciones" runat="server" CssClass="table table-bordered table-striped" 
                             AutoGenerateColumns="False" DataKeyNames="CodigoCita,CodigoPaciente,NombreCompletoPaciente,NombreServicio,FechaCita,Estado" 
-                            OnRowCommand="gvAtenciones_RowCommand">
+                            OnRowCommand="gvAtenciones_RowCommand" HeaderStyle-BackColor="#2f4053" HeaderStyle-ForeColor="white">
                             <Columns>
-                                <asp:BoundField DataField="CodigoCita" HeaderText="Código Cita" />
-                                <asp:BoundField DataField="CodigoPaciente" HeaderText="Código Paciente" />
-                                <asp:BoundField DataField="NombreCompletoPaciente" HeaderText="Paciente" />
-                                <asp:BoundField DataField="NombreServicio" HeaderText="Servicio" />
-                                <asp:BoundField DataField="FechaCita" HeaderText="Fecha" DataFormatString="{0:yyyy-MM-dd}" />
+                                <asp:BoundField DataField="CodigoCita" HeaderText="Código Cita"> <HeaderStyle ForeColor="white" />  </asp:BoundField>
+                                <asp:BoundField DataField="CodigoPaciente" HeaderText="Código Paciente" > <HeaderStyle ForeColor="white" />  </asp:BoundField>
+                                <asp:BoundField DataField="NombreCompletoPaciente" HeaderText="Paciente" > <HeaderStyle ForeColor="white" />  </asp:BoundField>
+                                <asp:BoundField DataField="NombreServicio" HeaderText="Servicio" > <HeaderStyle ForeColor="white" />  </asp:BoundField>
+                                <asp:BoundField DataField="FechaCita" HeaderText="Fecha" DataFormatString="{0:yyyy-MM-dd}" > <HeaderStyle ForeColor="white" />  </asp:BoundField>
                                 <asp:TemplateField HeaderText="Estado">
+                                    <HeaderStyle ForeColor="white" /> 
                                     <ItemTemplate>
                                         <span class='<%# Eval("Estado").ToString() == "Pendiente" ? "badge badge-pendiente" : "badge badge-atendido" %>'>
                                             <%# Eval("Estado") %>
@@ -94,6 +98,7 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Acciones">
+                                    <HeaderStyle ForeColor="white" /> 
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnAtender" Style="font-size:22px" runat="server" CssClass="btn-action" 
                                             CommandName="Atender" CommandArgument='<%# Container.DataItemIndex %>' ToolTip="Atender">

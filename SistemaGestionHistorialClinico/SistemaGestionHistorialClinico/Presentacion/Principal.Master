@@ -14,7 +14,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="background-color: #2f4053 !important;">
             <a class="navbar-brand ps-3" href="index.html">HC SANAR</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle"><i class="fas fa-bars"></i></button>
             <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -42,47 +42,50 @@
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
+
                         <div class="nav">
-                            <a class="nav-link" href="#" id="medicinaGeneralNavItem" runat="server">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user-circle"></i></div>
+                            <a class="nav-link" href="#" runat="server" style="color: white;">
+                                <div class="sb-nav-link-icon" style="color: #17a2b8;"><i class="fas fa-user-circle fa-lg"></i></div>
                                 Bailon Paucar
                             </a>
-                            <div class="sb-sidenav-menu-heading">Menu</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePacientes" aria-expanded="false" aria-controls="collapsePacientes" id="pacientesNavItem" runat="server">
-                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            <div class="sb-sidenav-menu-heading" style="color: white;">Menu</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePacientes" aria-expanded="false" aria-controls="collapsePacientes" id="pacientesNavItem" runat="server" style="color: white;">
+                                <div class="sb-nav-link-icon" style="color: #17a2b8;"><i class="fas fa-users fa-lg"></i></div>
                                 Pacientes
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                <div class="sb-sidenav-collapse-arrow" style="color: #17a2b8;"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePacientes" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="Pacientes.aspx">Pacientes</a>
+                                    <a class="nav-link" href="Pacientes.aspx" style="color: white;">Pacientes</a>
                                 </nav>
                             </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCitas" aria-expanded="false" aria-controls="collapseCitas" id="citasNavItem" runat="server">
-                                <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCitas" aria-expanded="false" aria-controls="collapseCitas" id="citasNavItem" runat="server" style="color: white;">
+                                <div class="sb-nav-link-icon" style="color: #17a2b8;"><i class="fas fa-calendar-alt fa-lg"></i></div>
                                 Citas
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                <div class="sb-sidenav-collapse-arrow" style="color: #17a2b8;"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseCitas" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="Citas.aspx">Citas</a>
+                                    <a class="nav-link" href="Citas.aspx" style="color: white;">Citas</a>
                                 </nav>
                             </div>
-                            <a class="nav-link" href="GestionAtencionMedica.aspx" id="triageNavItem" runat="server">
-                                <div class="sb-nav-link-icon"><i class="fas fa-stethoscope"></i></div>
+                            <a class="nav-link" href="GestionAtencionMedica.aspx" id="triageNavItem" runat="server" style="color: white;">
+                                <div class="sb-nav-link-icon" style="color: #17a2b8;"><i class="fas fa-stethoscope fa-lg"></i></div>
                                 Triaje
                             </a>
-                            <a class="nav-link" href="AtencionMedicina.aspx" id="AtencionMedicinaNavItem" runat="server">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user-md"></i></div>
+                            <a class="nav-link" href="AtencionMedicina.aspx" id="AtencionMedicinaNavItem" runat="server" style="color: white;">
+                                <div class="sb-nav-link-icon" style="color: #17a2b8;"><i class="fas fa-user-md fa-lg"></i></div>
                                 Medicina General
                             </a>
-                            <a class="nav-link" href="Usuarios.aspx" id="usuariosNavItem" runat="server">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            <a class="nav-link" href="Usuarios.aspx" id="usuariosNavItem" runat="server" style="color: white;">
+                                <div class="sb-nav-link-icon" style="color: #17a2b8;"><i class="fas fa-user fa-lg"></i></div>
                                 Usuarios
                             </a>
                         </div>
-                    </div>
-                    <div class="sb-sidenav-footer">
+
+                        </div>
+
+                    <div class="sb-sidenav-footer" style="background-color: #2f4053 !important; color: white">
                         <div class="small">App:</div>
                         Historial clinico
                     </div>

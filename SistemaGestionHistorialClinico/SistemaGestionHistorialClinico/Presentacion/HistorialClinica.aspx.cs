@@ -4,8 +4,6 @@ using System.Web.UI;
 using SistemaGestionHistorialClinico.Logica;
 using SistemaGestionHistorialClinico.Entidad;
 
-
-
 namespace SistemaGestionHistorialClinico.Presentacion
 {
     public partial class HistoriaClinica : System.Web.UI.Page
@@ -64,7 +62,16 @@ namespace SistemaGestionHistorialClinico.Presentacion
                     txtCodEnferDeta.Text = detalle.StrCodEnferDeta;
                     txtCuracionDeta.Text = detalle.StrCuracionDeta;
                     txtInyeccionDeta.Text = detalle.StrInyeccionDeta;
+
+                    // Planificación Familiar
                     txtHijosDeta.Text = detalle.IntHijosDeta.HasValue ? detalle.IntHijosDeta.Value.ToString() : "";
+                    txt0a3Deta.Text = detalle.Str0a3Deta;
+                    txt3a5Deta.Text = detalle.Str3a5Deta;
+                    txtMayor7Deta.Text = detalle.StrMayor7Deta;
+                    txtRnmascDeta.Text = detalle.StrRnmascDeta;
+                    txtRnfemeDeta.Text = detalle.StrRnfemeDeta;
+                    txtPartoNorDeta.Text = detalle.StrPartoNorDeta;
+                    txtPartoCesariDeta.Text = detalle.StrPartoCesariDeta;
                 }
                 else
                 {
@@ -74,6 +81,20 @@ namespace SistemaGestionHistorialClinico.Presentacion
             else
             {
                 lblPaciente.Text = "No se encontró historial para el paciente especificado.";
+            }
+        }
+
+        protected void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            // Redirigir a la página anterior
+            if (Request.UrlReferrer != null)
+            {
+                Response.Redirect(Request.UrlReferrer.ToString());
+            }
+            else
+            {
+                // Redirigir a una página por defecto si no hay página de referencia
+                Response.Redirect("~/Presentacion/Dashboard.aspx");
             }
         }
     }

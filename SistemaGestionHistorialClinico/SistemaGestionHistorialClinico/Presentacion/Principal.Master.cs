@@ -20,7 +20,7 @@ namespace SistemaGestionHistorialClinico.Presentacion
                     citasNavItem.Visible = false;
                     usuariosNavItem.Visible = false;
                     triageNavItem.Visible = false;
-                    medicinaGeneralNavItem.Visible = false;
+                    //medicinaGeneralNavItem.Visible = false;
                     AtencionMedicinaNavItem.Visible = false;
 
                     if (rol == "MEDICO")

@@ -109,13 +109,14 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[BU_HISTORIAL](
 	[strCod_histo] [varchar](200) NOT NULL, -- cod historia
-	[strCod_alu] [varchar](200) NULL, -- cod paciente
-	[strCod_ser] [varchar](200) NULL, -- cod servicio
-	[strCod_Car] [varchar](200) NULL,  -- no
-	[strCod_matric] [varchar](200) NULL, -- no
+	[strCod_alu] [varchar](200) NULL, -- cod paciente ( nombre completo) relacion con SIGUTC_PERSONAL
+	[strCod_ser] [varchar](200) NULL, -- cod servicio ( nombre de servicio  )
+
+	[strCod_Car] [varchar](200) NULL, -- 
+	[strCod_matric] [varchar](200) NULL,
 	[dtFecha_histo] [date] NULL,
-	[strCod_Sede] [varchar](200) NULL, -- no
-	[strCod_Fac] [varchar](200) NULL, -- no
+	[strCod_Sede] [varchar](200) NULL,
+	[strCod_Fac] [varchar](200) NULL,
 	[bitEstado_histo] [bit] NULL, 
 	[strUserLog] [varchar](200) NULL,
 	[dtFechaLog] [datetime] NULL,
@@ -1295,3 +1296,149 @@ BEGIN
     WHERE [strCod_alu] = @strCod_alu;
 END
 GO
+
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[spInsertBU_HISTORIAL]') AND type in (N'P', N'PC'))
+BEGIN
+    DROP PROCEDURE [dbo].[spInsertBU_HISTORIAL]
+END
+GO
+
+CREATE PROCEDURE spInsertBU_HISTORIAL
+    @strCod_histo VARCHAR(50),
+    @strCod_alu VARCHAR(50),
+    @strCod_ser VARCHAR(50),
+    @dtFecha_histo DATETIME,
+    @bitEstado_histo BIT,
+    @success BIT OUTPUT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        BEGIN TRANSACTION;
+        
+        INSERT INTO BU_HISTORIAL (strCod_histo, strCod_alu, strCod_ser, dtFecha_histo, bitEstado_histo)
+        VALUES (@strCod_histo, @strCod_alu, @strCod_ser, @dtFecha_histo, @bitEstado_histo);
+
+        SET @success = 1; -- Indica que la operación fue exitosa
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        SET @success = 0; -- Indica que la operación falló
+    END CATCH
+END;
+GO
+
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[spInsertBU_DETALLEHISTO]') AND type in (N'P', N'PC'))
+BEGIN
+    DROP PROCEDURE [dbo].[spInsertBU_DETALLEHISTO]
+END
+GO
+
+CREATE PROCEDURE [dbo].[spInsertBU_DETALLEHISTO]
+    @strCodDeta INT,
+    @strCodHisto VARCHAR(200),
+    @strCodAlu VARCHAR(200),
+    @strCodSer VARCHAR(200),
+    @dtFechaDeta DATE,
+    @strTipoAtenDeta VARCHAR(200),
+    @strMotConsDeta VARCHAR(500),
+    @strEnfeActuDeta VARCHAR(500),
+    @strDiasEnferDeta VARCHAR(500),
+    @strPatoloDeta VARCHAR(500),
+    @strDiagnosticoDeta VARCHAR(500),
+    @strTatamientoDeta VARCHAR(500),
+    @strEstadoDeta VARCHAR(500),
+    @strMedicamentoDeta VARCHAR(500),
+    @strCantidadDeta VARCHAR(200),
+    @strDosisDeta VARCHAR(200),
+    @strCodEnferDeta VARCHAR(500),
+    @strCuracionDeta VARCHAR(500),
+    @strInyeccionDeta VARCHAR(500),
+    @intHijosDeta INT,
+    @strUserLog VARCHAR(200),
+    @dtFechaLog DATETIME
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        INSERT INTO BU_DETALLEHISTO (
+            strCod_deta, strCod_histo, strCod_alu, strCod_ser, dtFecha_deta, strTipoAten_deta,
+            strMotCons_deta, strEnfeActu_deta, strDiasEnfer_deta, strPatolo_deta, strDiagnostico_deta,
+            strTatamiento_deta, strEstado_deta, strMedicamento_deta, strCantidad_deta, strDosis_deta,
+            strCodEnfer_deta, strCuracion_deta, strInyeccion_deta, intHijos_deta, strUserLog,
+            dtFechaLog
+        ) VALUES (
+            @strCodDeta, @strCodHisto, @strCodAlu, @strCodSer, @dtFechaDeta, @strTipoAtenDeta,
+            @strMotConsDeta, @strEnfeActuDeta, @strDiasEnferDeta, @strPatoloDeta, @strDiagnosticoDeta,
+            @strTatamientoDeta, @strEstadoDeta, @strMedicamentoDeta, @strCantidadDeta, @strDosisDeta,
+            @strCodEnferDeta, @strCuracionDeta, @strInyeccionDeta, @intHijosDeta, @strUserLog,
+            @dtFechaLog
+        );
+
+        COMMIT TRANSACTION;
+        -- Indicar que la operación fue exitosa
+        RETURN 1;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        -- Indicar que la operación falló
+        RETURN 0;
+    END CATCH
+END
+GO
+
+USE [Borrador12]
+GO
+
+-- Elimina el procedimiento almacenado si ya existe
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[spGetHistorialByCodAlu]') AND type in (N'P', N'PC'))
+BEGIN
+    DROP PROCEDURE [dbo].[spGetHistorialByCodAlu]
+END
+GO
+
+-- Creación del procedimiento almacenado
+CREATE PROCEDURE [dbo].[spGetHistorialByCodAlu]
+    @CodAlu VARCHAR(200)  -- Parámetro de entrada: Código del alumno
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        H.strCod_histo AS 'StrCodHisto',
+        CONCAT(P.NOMBRE_ALU, ' ', P.APELLIDO_ALU) AS 'Paciente',
+        S.strNombre_ser AS 'Servicio',
+        C.strNombre_Car AS 'Carrera',
+        M.strCod_matric AS 'CodigoMatricula',
+        SE.strNombre_Sede AS 'Sede',
+        F.strNombre_Fac AS 'Facultad',
+        H.dtFecha_histo AS 'DtFechaHisto',
+        H.bitEstado_histo AS 'BitEstadoHisto',
+        H.strUserLog AS 'StrUserLog',
+        H.dtFechaLog AS 'DtFechaLog'
+    FROM
+        BU_HISTORIAL H
+        INNER JOIN SIGUTC_PERSONAL P ON H.strCod_alu = P.strCod_alu
+        INNER JOIN BU_SERVICIO S ON H.strCod_ser = S.strCod_ser
+        INNER JOIN SIGUTC_SEDE SE ON P.strCod_Sede = SE.strCod_Sede
+        INNER JOIN SIGUTC_FACULTAD F ON P.strCod_Fac = F.strCod_Fac
+        INNER JOIN SIGUTC_CARRERA C ON P.strCod_Car = C.strCod_Car
+        INNER JOIN SIGUTC_MATRICULA M ON P.strCod_matric = M.strCod_matric
+    WHERE
+        H.strCod_alu = @CodAlu;
+
+END
+GO
+
+
+
+
+
+DECLARE @CodAlu VARCHAR(200) = '0519286254'; 
+
+EXEC [dbo].[spGetHistorialByCodAlu] @CodAlu;

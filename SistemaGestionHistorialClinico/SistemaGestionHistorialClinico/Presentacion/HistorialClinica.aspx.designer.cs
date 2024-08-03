@@ -175,15 +175,6 @@ namespace SistemaGestionHistorialClinico.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox txtDiagnosticoDeta;
         
         /// <summary>
-        /// txtTatamientoDeta control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTatamientoDeta;
-        
-        /// <summary>
         /// txtEstadoDeta control.
         /// </summary>
         /// <remarks>
@@ -191,6 +182,15 @@ namespace SistemaGestionHistorialClinico.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEstadoDeta;
+        
+        /// <summary>
+        /// txtTatamientoDeta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTatamientoDeta;
         
         /// <summary>
         /// txtMedicamentoDeta control.
@@ -254,5 +254,86 @@ namespace SistemaGestionHistorialClinico.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtHijosDeta;
+        
+        /// <summary>
+        /// txt0a3Deta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt0a3Deta;
+        
+        /// <summary>
+        /// txt3a5Deta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt3a5Deta;
+        
+        /// <summary>
+        /// txtMayor7Deta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMayor7Deta;
+        
+        /// <summary>
+        /// txtRnmascDeta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRnmascDeta;
+        
+        /// <summary>
+        /// txtRnfemeDeta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRnfemeDeta;
+        
+        /// <summary>
+        /// txtPartoNorDeta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPartoNorDeta;
+        
+        /// <summary>
+        /// txtPartoCesariDeta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPartoCesariDeta;
+        
+        /// <summary>
+        /// btnGuardarActualizar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardarActualizar;
+        
+        /// <summary>
+        /// btnCancelar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
     }
 }

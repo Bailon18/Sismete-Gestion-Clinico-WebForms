@@ -38,9 +38,9 @@ namespace SistemaGestionHistorialClinico.Entidad
         public string StrCodEnferDeta { get; set; }
         public string StrCuracionDeta { get; set; }
         public string StrInyeccionDeta { get; set; }
-        public int? IntHijosDeta { get; set; }
 
-        // inicio apartir de aca se dejara todo null
+        // Planificacion familiar 
+        public int? IntHijosDeta { get; set; }
         public string Str0a3Deta { get; set; }
         public string Str3a5Deta { get; set; }
         public string StrMayor7Deta { get; set; }
@@ -48,8 +48,12 @@ namespace SistemaGestionHistorialClinico.Entidad
         public string StrRnfemeDeta { get; set; }
         public string StrPartoNorDeta { get; set; }
         public string StrPartoCesariDeta { get; set; }
+        // Planificacion familiar 
+
         public string StrUserLog { get; set; }
         public DateTime? DtFechaLog { get; set; }
+
+
         public string StrObs1Deta { get; set; }
         public string StrObs2Deta { get; set; }
         public decimal? DecObs1Deta { get; set; }
@@ -58,7 +62,7 @@ namespace SistemaGestionHistorialClinico.Entidad
         public bool? BitObs2Deta { get; set; }
         public DateTime? DtObs1Deta { get; set; }
         public DateTime? DtObs2Deta { get; set; }
-        // fin apartir de aca se dejara todo null
+      
 
     }
 

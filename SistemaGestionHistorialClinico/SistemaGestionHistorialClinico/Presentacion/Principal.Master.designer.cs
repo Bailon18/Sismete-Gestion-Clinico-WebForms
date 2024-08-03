@@ -58,15 +58,6 @@ namespace SistemaGestionHistorialClinico.Presentacion {
         protected global::System.Web.UI.WebControls.LinkButton lnkCerrarSesion;
         
         /// <summary>
-        /// medicinaGeneralNavItem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor medicinaGeneralNavItem;
-        
-        /// <summary>
         /// pacientesNavItem control.
         /// </summary>
         /// <remarks>
