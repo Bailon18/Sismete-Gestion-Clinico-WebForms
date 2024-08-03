@@ -49,7 +49,7 @@ GO
 
 CREATE TABLE [dbo].[BU_DETALLEHISTO](
 
-	[strCod_deta] [int] NOT NULL, -- codigo del detalle 
+	[strCod_deta] [varchar](200) NOT NULL,
 	[strCod_histo] [varchar](200) NULL, -- codigo de historia
 	[strCod_alu] [varchar](200) NULL, -- codigo del paciente
 	[strCod_ser] [varchar](200) NULL, -- codigo de servicio 
@@ -77,8 +77,9 @@ CREATE TABLE [dbo].[BU_DETALLEHISTO](
 	[strCodEnfer_deta] [varchar](500) NULL, -- no se llena
 	[strCuracion_deta] [varchar](500) NULL, -- curacion
 	[strInyeccion_deta] [varchar](500) NULL, -- inyeccion
-	[intHijos_deta] [int] NULL, -- numeros de hijos
 
+	-- PLANIFICACION FAMILIAR
+	[intHijos_deta] [int] NULL, -- numeros de hijos
 	[str0a3_deta] [varchar](200) NULL,
 	[str3a5_deta] [varchar](200) NULL,
 	[strMayor7_deta] [varchar](200) NULL,
@@ -86,6 +87,8 @@ CREATE TABLE [dbo].[BU_DETALLEHISTO](
 	[strRnfeme_deta] [varchar](200) NULL,
 	[strPartoNor_deta] [varchar](200) NULL,
 	[strPartoCesari_deta] [varchar](200) NULL,
+	-- FIN PLANIFICACION FAMILIAR 
+
 	[strUserLog] [varchar](200) NULL,
 	[dtFechaLog] [datetime] NULL,
 	[strObs1_deta] [varchar](100) NULL,
@@ -1442,3 +1445,173 @@ GO
 DECLARE @CodAlu VARCHAR(200) = '0519286254'; 
 
 EXEC [dbo].[spGetHistorialByCodAlu] @CodAlu;
+
+
+-- Elimina el procedimiento si ya existe
+IF OBJECT_ID('dbo.InsertarDetalleHisto', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.InsertarDetalleHisto;
+GO
+
+-- Crea el procedimiento almacenado para insertar un detalle
+CREATE PROCEDURE dbo.InsertarDetalleHisto
+    @strCod_deta        VARCHAR(200), -- Cambiado a VARCHAR
+    @strCod_histo       VARCHAR(200),
+    @strCod_alu         VARCHAR(200),
+    @strCod_ser         VARCHAR(200),
+    @strCod_Sede        VARCHAR(200) = NULL,
+    @strCod_Fac         VARCHAR(200) = NULL,
+    @strCod_Car         VARCHAR(200) = NULL,
+    @strCod_matric      VARCHAR(200) = NULL,
+    @strCod_sig         VARCHAR(200) = NULL,
+    @dtFecha_deta       DATE = NULL,
+    @strTipoAten_deta   VARCHAR(200) = NULL,
+    @strMotCons_deta    VARCHAR(500) = NULL,
+    @strEnfeActu_deta   VARCHAR(500) = NULL,
+    @strDiasEnfer_deta  VARCHAR(500) = NULL,
+    @strPatolo_deta     VARCHAR(500) = NULL,
+    @strDiagnostico_deta VARCHAR(500) = NULL,
+    @strTatamiento_deta VARCHAR(500) = NULL,
+    @strEstado_deta     VARCHAR(500) = NULL,
+    @strMedicamento_deta VARCHAR(500) = NULL,
+    @strCantidad_deta   VARCHAR(200) = NULL,
+    @strDosis_deta      VARCHAR(200) = NULL,
+    @strCodEnfer_deta   VARCHAR(500) = NULL,
+    @strCuracion_deta   VARCHAR(500) = NULL,
+    @strInyeccion_deta  VARCHAR(500) = NULL,
+    @intHijos_deta      INT = NULL,
+    @str0a3_deta        VARCHAR(200) = NULL,
+    @str3a5_deta        VARCHAR(200) = NULL,
+    @strMayor7_deta     VARCHAR(200) = NULL,
+    @strRnmasc_deta     VARCHAR(200) = NULL,
+    @strRnfeme_deta     VARCHAR(200) = NULL,
+    @strPartoNor_deta   VARCHAR(200) = NULL,
+    @strPartoCesari_deta VARCHAR(200) = NULL,
+    @strUserLog         VARCHAR(200) = NULL,
+    @dtFechaLog         DATETIME = NULL,
+    @Resultado          INT OUTPUT -- Parámetro de salida para el resultado
+AS
+BEGIN
+    BEGIN TRY
+        INSERT INTO BU_DETALLEHISTO (
+            strCod_deta, strCod_histo, strCod_alu, strCod_ser, strCod_Sede, 
+            strCod_Fac, strCod_Car, strCod_matric, strCod_sig, dtFecha_deta, 
+            strTipoAten_deta, strMotCons_deta, strEnfeActu_deta, strDiasEnfer_deta, 
+            strPatolo_deta, strDiagnostico_deta, strTatamiento_deta, strEstado_deta, 
+            strMedicamento_deta, strCantidad_deta, strDosis_deta, strCodEnfer_deta, 
+            strCuracion_deta, strInyeccion_deta, intHijos_deta, str0a3_deta, str3a5_deta, 
+            strMayor7_deta, strRnmasc_deta, strRnfeme_deta, strPartoNor_deta, 
+            strPartoCesari_deta, strUserLog, dtFechaLog
+        )
+        VALUES (
+            @strCod_deta, @strCod_histo, @strCod_alu, @strCod_ser, @strCod_Sede, 
+            @strCod_Fac, @strCod_Car, @strCod_matric, @strCod_sig, @dtFecha_deta, 
+            @strTipoAten_deta, @strMotCons_deta, @strEnfeActu_deta, @strDiasEnfer_deta, 
+            @strPatolo_deta, @strDiagnostico_deta, @strTatamiento_deta, @strEstado_deta, 
+            @strMedicamento_deta, @strCantidad_deta, @strDosis_deta, @strCodEnfer_deta, 
+            @strCuracion_deta, @strInyeccion_deta, @intHijos_deta, @str0a3_deta, @str3a5_deta, 
+            @strMayor7_deta, @strRnmasc_deta, @strRnfeme_deta, @strPartoNor_deta, 
+            @strPartoCesari_deta, @strUserLog, @dtFechaLog
+        );
+        
+        -- Asigna 0 a @Resultado si todo sale bien
+        SET @Resultado = 0;
+    END TRY
+    BEGIN CATCH
+        -- En caso de error, asigna 1 a @Resultado
+        SET @Resultado = 1;
+    END CATCH
+END
+GO
+
+
+-- Elimina el procedimiento si ya existe
+IF OBJECT_ID('dbo.ActualizarDetalleHisto', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.ActualizarDetalleHisto;
+GO
+
+-- Crea el procedimiento almacenado para actualizar un detalle
+CREATE PROCEDURE dbo.ActualizarDetalleHisto
+    @strCod_deta        VARCHAR(200), -- Identificador del detalle
+    @strCod_histo       VARCHAR(200),
+    @strCod_alu         VARCHAR(200),
+    @strCod_ser         VARCHAR(200),
+    @strCod_Sede        VARCHAR(200) = NULL,
+    @strCod_Fac         VARCHAR(200) = NULL,
+    @strCod_Car         VARCHAR(200) = NULL,
+    @strCod_matric      VARCHAR(200) = NULL,
+    @strCod_sig         VARCHAR(200) = NULL,
+    @dtFecha_deta       DATE = NULL,
+    @strTipoAten_deta   VARCHAR(200) = NULL,
+    @strMotCons_deta    VARCHAR(500) = NULL,
+    @strEnfeActu_deta   VARCHAR(500) = NULL,
+    @strDiasEnfer_deta  VARCHAR(500) = NULL,
+    @strPatolo_deta     VARCHAR(500) = NULL,
+    @strDiagnostico_deta VARCHAR(500) = NULL,
+    @strTatamiento_deta VARCHAR(500) = NULL,
+    @strEstado_deta     VARCHAR(500) = NULL,
+    @strMedicamento_deta VARCHAR(500) = NULL,
+    @strCantidad_deta   VARCHAR(200) = NULL,
+    @strDosis_deta      VARCHAR(200) = NULL,
+    @strCodEnfer_deta   VARCHAR(500) = NULL,
+    @strCuracion_deta   VARCHAR(500) = NULL,
+    @strInyeccion_deta  VARCHAR(500) = NULL,
+    @intHijos_deta      INT = NULL,
+    @str0a3_deta        VARCHAR(200) = NULL,
+    @str3a5_deta        VARCHAR(200) = NULL,
+    @strMayor7_deta     VARCHAR(200) = NULL,
+    @strRnmasc_deta     VARCHAR(200) = NULL,
+    @strRnfeme_deta     VARCHAR(200) = NULL,
+    @strPartoNor_deta   VARCHAR(200) = NULL,
+    @strPartoCesari_deta VARCHAR(200) = NULL,
+    @strUserLog         VARCHAR(200) = NULL,
+    @dtFechaLog         DATETIME = NULL,
+    @Resultado          INT OUTPUT -- Parámetro de salida para el resultado
+AS
+BEGIN
+    BEGIN TRY
+        UPDATE BU_DETALLEHISTO
+        SET
+            strCod_histo = @strCod_histo,
+            strCod_alu = @strCod_alu,
+            strCod_ser = @strCod_ser,
+            strCod_Sede = @strCod_Sede,
+            strCod_Fac = @strCod_Fac,
+            strCod_Car = @strCod_Car,
+            strCod_matric = @strCod_matric,
+            strCod_sig = @strCod_sig,
+            dtFecha_deta = @dtFecha_deta,
+            strTipoAten_deta = @strTipoAten_deta,
+            strMotCons_deta = @strMotCons_deta,
+            strEnfeActu_deta = @strEnfeActu_deta,
+            strDiasEnfer_deta = @strDiasEnfer_deta,
+            strPatolo_deta = @strPatolo_deta,
+            strDiagnostico_deta = @strDiagnostico_deta,
+            strTatamiento_deta = @strTatamiento_deta,
+            strEstado_deta = @strEstado_deta,
+            strMedicamento_deta = @strMedicamento_deta,
+            strCantidad_deta = @strCantidad_deta,
+            strDosis_deta = @strDosis_deta,
+            strCodEnfer_deta = @strCodEnfer_deta,
+            strCuracion_deta = @strCuracion_deta,
+            strInyeccion_deta = @strInyeccion_deta,
+            intHijos_deta = @intHijos_deta,
+            str0a3_deta = @str0a3_deta,
+            str3a5_deta = @str3a5_deta,
+            strMayor7_deta = @strMayor7_deta,
+            strRnmasc_deta = @strRnmasc_deta,
+            strRnfeme_deta = @strRnfeme_deta,
+            strPartoNor_deta = @strPartoNor_deta,
+            strPartoCesari_deta = @strPartoCesari_deta,
+            strUserLog = @strUserLog,
+            dtFechaLog = @dtFechaLog
+        WHERE strCod_deta = @strCod_deta;
+
+        -- Asigna 0 a @Resultado si todo sale bien
+        SET @Resultado = 0;
+    END TRY
+    BEGIN CATCH
+        -- En caso de error, asigna 1 a @Resultado
+        SET @Resultado = 1;
+    END CATCH
+END
+GO

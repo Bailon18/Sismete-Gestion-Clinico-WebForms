@@ -270,5 +270,133 @@ namespace SistemaGestionHistorialClinico.Data
             return detalle; // Devuelve el detalle encontrado o null si no se encontró ninguno
         }
 
+        public bool InsertarDetalleHisto(BU_DetalleHisto detalle)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("InsertarDetalleHisto", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@strCod_deta", detalle.StrCodDeta);
+                    cmd.Parameters.AddWithValue("@strCod_histo", detalle.StrCodHisto);
+                    cmd.Parameters.AddWithValue("@strCod_alu", detalle.StrCodAlu);
+                    cmd.Parameters.AddWithValue("@strCod_ser", detalle.StrCodSer);
+                    cmd.Parameters.AddWithValue("@strCod_Sede", detalle.StrCodSede ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strCod_Fac", detalle.StrCodFac ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strCod_Car", detalle.StrCodCar ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strCod_matric", detalle.StrCodMatric ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strCod_sig", detalle.StrCodSig ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@dtFecha_deta", detalle.DtFechaDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strTipoAten_deta", detalle.StrTipoAtenDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strMotCons_deta", detalle.StrMotConsDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strEnfeActu_deta", detalle.StrEnfeActuDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strDiasEnfer_deta", detalle.StrDiasEnferDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strPatolo_deta", detalle.StrPatoloDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strDiagnostico_deta", detalle.StrDiagnosticoDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strTatamiento_deta", detalle.StrTatamientoDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strEstado_deta", detalle.StrEstadoDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strMedicamento_deta", detalle.StrMedicamentoDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strCantidad_deta", detalle.StrCantidadDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strDosis_deta", detalle.StrDosisDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strCodEnfer_deta", detalle.StrCodEnferDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strCuracion_deta", detalle.StrCuracionDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strInyeccion_deta", detalle.StrInyeccionDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@intHijos_deta", detalle.IntHijosDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@str0a3_deta", detalle.Str0a3Deta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@str3a5_deta", detalle.Str3a5Deta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strMayor7_deta", detalle.StrMayor7Deta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strRnmasc_deta", detalle.StrRnmascDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strRnfeme_deta", detalle.StrRnfemeDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strPartoNor_deta", detalle.StrPartoNorDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strPartoCesari_deta", detalle.StrPartoCesariDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strUserLog", detalle.StrUserLog ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@dtFechaLog", detalle.DtFechaLog ?? (object)DBNull.Value);
+
+                    SqlParameter resultadoParam = new SqlParameter("@Resultado", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(resultadoParam);
+
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+
+                        int resultado = (int)cmd.Parameters["@Resultado"].Value;
+                        return resultado == 0;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("Error al insertar detalle del historial: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        public bool ActualizarDetalleHisto(BU_DetalleHisto detalle)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("ActualizarDetalleHisto", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@strCod_deta", detalle.StrCodDeta);
+                    cmd.Parameters.AddWithValue("@strCod_histo", detalle.StrCodHisto);
+                    cmd.Parameters.AddWithValue("@strCod_alu", detalle.StrCodAlu);
+                    cmd.Parameters.AddWithValue("@strCod_ser", detalle.StrCodSer);
+                    cmd.Parameters.AddWithValue("@strCod_Sede", detalle.StrCodSede ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strCod_Fac", detalle.StrCodFac ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strCod_Car", detalle.StrCodCar ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strCod_matric", detalle.StrCodMatric ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strCod_sig", detalle.StrCodSig ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@dtFecha_deta", detalle.DtFechaDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strTipoAten_deta", detalle.StrTipoAtenDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strMotCons_deta", detalle.StrMotConsDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strEnfeActu_deta", detalle.StrEnfeActuDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strDiasEnfer_deta", detalle.StrDiasEnferDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strPatolo_deta", detalle.StrPatoloDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strDiagnostico_deta", detalle.StrDiagnosticoDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strTatamiento_deta", detalle.StrTatamientoDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strEstado_deta", detalle.StrEstadoDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strMedicamento_deta", detalle.StrMedicamentoDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strCantidad_deta", detalle.StrCantidadDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strDosis_deta", detalle.StrDosisDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strCodEnfer_deta", detalle.StrCodEnferDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strCuracion_deta", detalle.StrCuracionDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strInyeccion_deta", detalle.StrInyeccionDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@intHijos_deta", detalle.IntHijosDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@str0a3_deta", detalle.Str0a3Deta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@str3a5_deta", detalle.Str3a5Deta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strMayor7_deta", detalle.StrMayor7Deta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strRnmasc_deta", detalle.StrRnmascDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strRnfeme_deta", detalle.StrRnfemeDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strPartoNor_deta", detalle.StrPartoNorDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strPartoCesari_deta", detalle.StrPartoCesariDeta ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@strUserLog", detalle.StrUserLog ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@dtFechaLog", detalle.DtFechaLog ?? (object)DBNull.Value);
+
+                    SqlParameter resultadoParam = new SqlParameter("@Resultado", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(resultadoParam);
+
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+
+                        int resultado = (int)cmd.Parameters["@Resultado"].Value;
+                        return resultado == 0;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("Error al actualizar detalle del historial: " + ex.Message);
+                    }
+                }
+            }
+        }
+
     }
 }

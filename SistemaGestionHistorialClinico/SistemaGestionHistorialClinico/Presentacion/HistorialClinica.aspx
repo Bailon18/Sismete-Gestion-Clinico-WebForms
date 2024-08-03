@@ -1,28 +1,30 @@
-﻿<%@ Page Title="Historia Clínica" Language="C#" MasterPageFile="~/Presentacion/Principal.master" AutoEventWireup="true" CodeBehind="HistoriaClinica.aspx.cs" Inherits="SistemaGestionHistorialClinico.Presentacion.HistoriaClinica" %>
+﻿<%@ Page Title="Historia Clínica" Language="C#" MasterPageFile="~/Presentacion/Principal.master" AutoEventWireup="true" CodeBehind="HistorialClinica.aspx.cs" Inherits="SistemaGestionHistorialClinico.Presentacion.HistoriaClinica" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Historia Clínica</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
             .btn-custom {
                 margin-right: 10px;
             }
             .card-custom {
                 margin-bottom: 20px;
-                background-color: #f8f9fa; /* Gris claro */
-                border-radius: 8px; /* Bordes redondeados */
-                border: 1px solid #ddd; /* Borde gris */
+                background-color: #f8f9fa; 
+                border-radius: 8px;
+                border: 1px solid #ddd;
             }
             .card-header {
-                background: #2f4053; /* Degradado basado en #2f4053 */
-                color: white; /* Color del texto del título */
-                font-weight: bold; /* Negrita para el título */
+                background: #2f4053;
+                color: white; 
+                font-weight: bold; 
             }
             .card-body {
                 padding: 20px;
             }
             h5 {
-                color: #2f4053; /* Color predominante para subtítulos */
+                color: #2f4053; 
                 font-weight: bold;
                 margin-top: 20px;
             }
@@ -37,7 +39,7 @@
     <div class="container">
         <h3 class="mt-4" style="color: #2f4053; font-weight: bold;">Historia Clínica</h3>
         <ol class="breadcrumb mb-2">
-            <!-- Breadcrumb content can be added here -->
+            
         </ol>
 
         <div class="accordion" id="accordionHistoria">
@@ -157,9 +159,37 @@
                                         <asp:TextBox ID="txtTatamientoDeta" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="txtMedicamentoDeta"><strong>Medicamento</strong></label>
-                                        <asp:TextBox ID="txtMedicamentoDeta" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <label for="ddlMedicamentoDeta"><strong>Medicamento</strong></label>
+                                        <asp:DropDownList ID="ddlMedicamentoDeta" runat="server" CssClass="form-control">
+                                            <asp:ListItem Value="" Text="Seleccione un medicamento" />
+                                            <asp:ListItem Value="Ibuprofeno" Text="Ibuprofeno" />
+                                            <asp:ListItem Value="Paracetamol" Text="Paracetamol" />
+                                            <asp:ListItem Value="Amoxicilina" Text="Amoxicilina" />
+                                            <asp:ListItem Value="Omeprazol" Text="Omeprazol" />
+                                            <asp:ListItem Value="Metformina" Text="Metformina" />
+                                            <asp:ListItem Value="Atorvastatina" Text="Atorvastatina" />
+                                            <asp:ListItem Value="Losartán" Text="Losartán" />
+                                            <asp:ListItem Value="Salbutamol" Text="Salbutamol" />
+                                            <asp:ListItem Value="Claritromicina" Text="Claritromicina" />
+                                            <asp:ListItem Value="Metoprolol" Text="Metoprolol" />
+                                            <asp:ListItem Value="Aspirina" Text="Aspirina" />
+                                            <asp:ListItem Value="Simvastatina" Text="Simvastatina" />
+                                            <asp:ListItem Value="Loratadina" Text="Loratadina" />
+                                            <asp:ListItem Value="Cetirizina" Text="Cetirizina" />
+                                            <asp:ListItem Value="Ranitidina" Text="Ranitidina" />
+                                            <asp:ListItem Value="Diclofenaco" Text="Diclofenaco" />
+                                            <asp:ListItem Value="Enalapril" Text="Enalapril" />
+                                            <asp:ListItem Value="Prednisona" Text="Prednisona" />
+                                            <asp:ListItem Value="Levotiroxina" Text="Levotiroxina" />
+                                            <asp:ListItem Value="Clopidogrel" Text="Clopidogrel" />
+                                            <asp:ListItem Value="Fluconazol" Text="Fluconazol" />
+                                            <asp:ListItem Value="Furosemida" Text="Furosemida" />
+                                            <asp:ListItem Value="Glucosa" Text="Glucosa" />
+                                            <asp:ListItem Value="Lansoprazol" Text="Lansoprazol" />
+                                            <asp:ListItem Value="Naproxeno" Text="Naproxeno" />
+                                        </asp:DropDownList>
                                     </div>
+
                                     <div class="form-group col-md-4">
                                         <label for="txtCantidadDeta"><strong>Cantidad</strong></label>
                                         <asp:TextBox ID="txtCantidadDeta" runat="server" CssClass="form-control"></asp:TextBox>
@@ -171,9 +201,27 @@
                                         <asp:TextBox ID="txtDosisDeta" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="txtCodEnferDeta"><strong>Código Enfermedad</strong></label>
-                                        <asp:TextBox ID="txtCodEnferDeta" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <label for="ddlCodEnferDeta"><strong>Enfermedad</strong></label>
+                                        <asp:DropDownList ID="ddlCodEnferDeta" runat="server" CssClass="form-control">
+                                            <asp:ListItem Text="Seleccione una enfermedad" Value="" />
+                                            <asp:ListItem Text="Diabetes" Value="Diabetes" />
+                                            <asp:ListItem Text="Hipertensión" Value="Hipertensión" />
+                                            <asp:ListItem Text="Asma" Value="Asma" />
+                                            <asp:ListItem Text="Artritis" Value="Artritis" />
+                                            <asp:ListItem Text="Cáncer" Value="Cáncer" />
+                                            <asp:ListItem Text="Enfermedad de Alzheimer" Value="Enfermedad de Alzheimer" />
+                                            <asp:ListItem Text="Enfermedad cardíaca" Value="Enfermedad cardíaca" />
+                                            <asp:ListItem Text="Obesidad" Value="Obesidad" />
+                                            <asp:ListItem Text="Depresión" Value="Depresión" />
+                                            <asp:ListItem Text="Ansiedad" Value="Ansiedad" />
+                                            <asp:ListItem Text="Migraña" Value="Migraña" />
+                                            <asp:ListItem Text="Bronquitis" Value="Bronquitis" />
+                                            <asp:ListItem Text="EPOC" Value="EPOC" />
+                                            <asp:ListItem Text="Osteoporosis" Value="Osteoporosis" />
+                                            <asp:ListItem Text="Gripe" Value="Gripe" />
+                                        </asp:DropDownList>
                                     </div>
+
                                     <div class="form-group col-md-4">
                                         <label for="txtCuracionDeta"><strong>Curación</strong></label>
                                         <asp:TextBox ID="txtCuracionDeta" runat="server" CssClass="form-control"></asp:TextBox>
@@ -221,20 +269,28 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label for="txtPartoNorDeta"><strong>Parto Normal</strong></label>
-                                        <asp:TextBox ID="txtPartoNorDeta" runat="server" CssClass="form-control"></asp:TextBox>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="txtPartoCesariDeta"><strong>Parto Cesárea</strong></label>
-                                        <asp:TextBox ID="txtPartoCesariDeta" runat="server" CssClass="form-control"></asp:TextBox>
-                                    </div>
+                                  <div class="form-group col-md-4">
+                                    <label for="ddlPartoNorDeta"><strong>Parto Normal</strong></label>
+                                    <asp:DropDownList ID="ddlPartoNorDeta" runat="server" CssClass="form-control">
+                                        <asp:ListItem Value="Si" Text="Sí" />
+                                        <asp:ListItem Value="No" Text="No" />
+                                    </asp:DropDownList>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="ddlPartoCesariDeta"><strong>Parto Cesárea</strong></label>
+                                    <asp:DropDownList ID="ddlPartoCesariDeta" runat="server" CssClass="form-control">
+                                        <asp:ListItem Value="Si" Text="Sí" />
+                                        <asp:ListItem Value="No" Text="No" />
+                                    </asp:DropDownList>
+                                </div>
+
                                 </div>
                             </div>
                         </div>
 
                         <div class="text-right mt-4">
-                            <asp:Button ID="btnGuardarActualizar" runat="server" Text="Guardar" CssClass="btn btn-primary btn-custom" />
+                            <asp:Button ID="btnGuardarActualizar" runat="server" Text="Guardar" CssClass="btn btn-primary btn-custom" OnClick="BtnGuardarActualizar_Click"/>
                             <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-secondary btn-custom" OnClick="BtnCancelar_Click" />
                         </div>
                     </div>

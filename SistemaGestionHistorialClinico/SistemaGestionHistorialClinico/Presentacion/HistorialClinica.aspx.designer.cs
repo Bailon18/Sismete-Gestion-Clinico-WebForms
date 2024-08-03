@@ -193,13 +193,13 @@ namespace SistemaGestionHistorialClinico.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox txtTatamientoDeta;
         
         /// <summary>
-        /// txtMedicamentoDeta control.
+        /// ddlMedicamentoDeta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMedicamentoDeta;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMedicamentoDeta;
         
         /// <summary>
         /// txtCantidadDeta control.
@@ -220,13 +220,13 @@ namespace SistemaGestionHistorialClinico.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox txtDosisDeta;
         
         /// <summary>
-        /// txtCodEnferDeta control.
+        /// ddlCodEnferDeta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodEnferDeta;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCodEnferDeta;
         
         /// <summary>
         /// txtCuracionDeta control.
@@ -301,22 +301,22 @@ namespace SistemaGestionHistorialClinico.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox txtRnfemeDeta;
         
         /// <summary>
-        /// txtPartoNorDeta control.
+        /// ddlPartoNorDeta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPartoNorDeta;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPartoNorDeta;
         
         /// <summary>
-        /// txtPartoCesariDeta control.
+        /// ddlPartoCesariDeta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPartoCesariDeta;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPartoCesariDeta;
         
         /// <summary>
         /// btnGuardarActualizar control.

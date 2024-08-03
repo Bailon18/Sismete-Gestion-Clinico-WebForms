@@ -41,5 +41,15 @@ namespace SistemaGestionHistorialClinico.Logica
         {
             return historialData.GetDetalleHistoByAlumno(strCodAlu);
         }
+
+        public bool GuardarDetalleHisto(BU_DetalleHisto detalle)
+        {
+            return historialData.InsertarDetalleHisto(detalle);
+        }
+
+        public bool ActualizarDetalleHisto(BU_DetalleHisto detalle)
+        {
+            return historialData.ActualizarDetalleHisto(detalle);
+        }
     }
 }

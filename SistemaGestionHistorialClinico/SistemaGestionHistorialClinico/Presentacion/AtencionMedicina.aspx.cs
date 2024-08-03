@@ -81,6 +81,7 @@ namespace SistemaGestionHistorialClinico.Presentacion
 
             if (result)
             {
+                // si quiere cambiar atendido sin aver llenado entonces validar que en verda ya tenga un atendido
                 if (estadoActual == "Atendido")
                 {
                     bool deleted = citaLogica.eliminarDetallecita(codigoCita);
