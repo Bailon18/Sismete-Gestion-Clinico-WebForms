@@ -7,6 +7,21 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <style>
+        .background-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1;
+            }
+
+            form {
+                position: relative;
+                z-index: 2;
+            }
+
         .vh-100 {
                 height: 100vh;
             }
@@ -33,6 +48,7 @@
     </style>
 </head>
 <body>
+    <div class="background-overlay"></div>
     <form id="form1" runat="server" class="d-flex justify-content-center align-items-center vh-100">
         <div class="overlay card p-4" style="width: 20rem;">
             <div class="text-center">

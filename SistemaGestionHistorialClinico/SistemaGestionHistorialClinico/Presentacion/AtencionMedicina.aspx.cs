@@ -62,7 +62,7 @@ namespace SistemaGestionHistorialClinico.Presentacion
             else if (e.CommandName == "VerHistoria")
             {
                 string codigoPaciente = gvAtenciones.DataKeys[index].Values["CodigoPaciente"].ToString();
-                Response.Redirect($"HistoriaClinica.aspx?codigoPaciente={codigoPaciente}");
+                Response.Redirect($"HistorialClinica.aspx?codigoPaciente={codigoPaciente}");
             }
             else if (e.CommandName == "CambiarEstado")
             {

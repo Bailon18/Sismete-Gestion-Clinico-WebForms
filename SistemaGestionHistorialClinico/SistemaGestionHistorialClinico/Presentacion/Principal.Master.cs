@@ -16,7 +16,6 @@ namespace SistemaGestionHistorialClinico.Presentacion
 
                     string rol = Session["Rol"].ToString();
 
-                    // Asegurarse de que todos los menús estén ocultos al inicio
                     pacientesNavItem.Visible = false;
                     citasNavItem.Visible = false;
                     usuariosNavItem.Visible = false;
@@ -26,17 +25,14 @@ namespace SistemaGestionHistorialClinico.Presentacion
 
                     if (rol == "MEDICO")
                     {
-                        // Mostrar solo el menú de Medicina General
-                        medicinaGeneralNavItem.Visible = true;
+                        AtencionMedicinaNavItem.Visible = true;
                     }
                     else if (rol == "ENFERMERA")
                     {
-                        // Mostrar solo el menú de Triaje
                         triageNavItem.Visible = true;
                     }
                     else
                     {
-                        // Mostrar solo los menús administrativos
                         pacientesNavItem.Visible = true;
                         citasNavItem.Visible = true;
                         usuariosNavItem.Visible = true;

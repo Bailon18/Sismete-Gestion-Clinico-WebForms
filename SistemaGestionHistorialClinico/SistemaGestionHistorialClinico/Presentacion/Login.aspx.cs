@@ -27,7 +27,7 @@ namespace SistemaGestionHistorialClinico.Presentacion
                 Session["NombreCompleto"] = $"{usuario.NOMBRE_ALU} {usuario.APELLIDO_ALU} {usuario.APELLIDOM_ALU}";
                 Session["Rol"] = usuario.strRol;
 
-                // Redirigir según el rol del usuario
+   
                 if (usuario.strRol == "MEDICO")
                 {
                     Response.Redirect("~/Presentacion/AtencionMedicina.aspx");

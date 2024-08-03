@@ -139,5 +139,136 @@ namespace SistemaGestionHistorialClinico.Data
             }
         }
 
+
+        public BU_HISTORIAL GetHistorialByAlumno(string strCodAlu)
+        {
+            BU_HISTORIAL historial = null;
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("spGetHistorialByAlumno", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@strCod_alu", strCodAlu);
+
+                    try
+                    {
+                        con.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read()) 
+                            {
+                                historial = new BU_HISTORIAL
+                                {
+                                    strCod_histo = reader["strCod_histo"].ToString(),
+                                    strCod_alu = reader["strCod_alu"].ToString(),
+                                    strCod_ser = reader["strCod_ser"].ToString(),
+                                    strCod_Car = reader["strCod_Car"].ToString(),
+                                    strCod_matric = reader["strCod_matric"].ToString(),
+                                    dtFecha_histo = reader.IsDBNull(reader.GetOrdinal("dtFecha_histo")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("dtFecha_histo")),
+                                    strCod_Sede = reader["strCod_Sede"].ToString(),
+                                    strCod_Fac = reader["strCod_Fac"].ToString(),
+                                    bitEstado_histo = reader.IsDBNull(reader.GetOrdinal("bitEstado_histo")) ? (bool?)null : reader.GetBoolean(reader.GetOrdinal("bitEstado_histo")),
+                                    strUserLog = reader["strUserLog"].ToString(),
+                                    dtFechaLog = reader.IsDBNull(reader.GetOrdinal("dtFechaLog")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("dtFechaLog")),
+                                    strObs1_histo = reader["strObs1_histo"].ToString(),
+                                    strObs2_histo = reader["strObs2_histo"].ToString(),
+                                    decObs1_histo = reader.IsDBNull(reader.GetOrdinal("decObs1_histo")) ? (decimal?)null : reader.GetDecimal(reader.GetOrdinal("decObs1_histo")),
+                                    decObs2_histo = reader.IsDBNull(reader.GetOrdinal("decObs2_histo")) ? (decimal?)null : reader.GetDecimal(reader.GetOrdinal("decObs2_histo")),
+                                    bitObs1_histo = reader.IsDBNull(reader.GetOrdinal("bitObs1_histo")) ? (bool?)null : reader.GetBoolean(reader.GetOrdinal("bitObs1_histo")),
+                                    bitObs2_histo = reader.IsDBNull(reader.GetOrdinal("bitObs2_histo")) ? (bool?)null : reader.GetBoolean(reader.GetOrdinal("bitObs2_histo")),
+                                    dtObs1_histo = reader.IsDBNull(reader.GetOrdinal("dtObs1_histo")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("dtObs1_histo")),
+                                    dtObs2_histo = reader.IsDBNull(reader.GetOrdinal("dtObs2_histo")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("dtObs2_histo")),
+                                    strCod_medico = reader["strCod_medico"].ToString()
+                                };
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("Error al obtener historial por alumno: " + ex.Message);
+                    }
+                }
+            }
+
+            return historial;
+        }
+
+        public BU_DetalleHisto GetDetalleHistoByAlumno(string strCodAlu)
+        {
+            BU_DetalleHisto detalle = null;
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("spGetDetalleHistoByAlumno", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@strCod_alu", strCodAlu);
+
+                    try
+                    {
+                        con.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read()) // Cambiado de `while` a `if` para obtener solo un registro
+                            {
+                                detalle = new BU_DetalleHisto
+                                {
+                                    StrCodDeta = reader["strCod_deta"].ToString(),
+                                    StrCodHisto = reader["strCod_histo"].ToString(),
+                                    StrCodAlu = reader["strCod_alu"].ToString(),
+                                    StrCodSer = reader["strCod_ser"].ToString(),
+                                    StrCodSede = reader["strCod_Sede"].ToString(),
+                                    StrCodFac = reader["strCod_Fac"].ToString(),
+                                    StrCodCar = reader["strCod_Car"].ToString(),
+                                    StrCodMatric = reader["strCod_matric"].ToString(),
+                                    StrCodSig = reader["strCod_sig"].ToString(),
+                                    DtFechaDeta = reader.IsDBNull(reader.GetOrdinal("dtFecha_deta")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("dtFecha_deta")),
+                                    StrTipoAtenDeta = reader["strTipoAten_deta"].ToString(),
+                                    StrMotConsDeta = reader["strMotCons_deta"].ToString(),
+                                    StrEnfeActuDeta = reader["strEnfeActu_deta"].ToString(),
+                                    StrDiasEnferDeta = reader["strDiasEnfer_deta"].ToString(),
+                                    StrPatoloDeta = reader["strPatolo_deta"].ToString(),
+                                    StrDiagnosticoDeta = reader["strDiagnostico_deta"].ToString(),
+                                    StrTatamientoDeta = reader["strTatamiento_deta"].ToString(),
+                                    StrEstadoDeta = reader["strEstado_deta"].ToString(),
+                                    StrMedicamentoDeta = reader["strMedicamento_deta"].ToString(),
+                                    StrCantidadDeta = reader["strCantidad_deta"].ToString(),
+                                    StrDosisDeta = reader["strDosis_deta"].ToString(),
+                                    StrCodEnferDeta = reader["strCodEnfer_deta"].ToString(),
+                                    StrCuracionDeta = reader["strCuracion_deta"].ToString(),
+                                    StrInyeccionDeta = reader["strInyeccion_deta"].ToString(),
+                                    IntHijosDeta = reader.IsDBNull(reader.GetOrdinal("intHijos_deta")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("intHijos_deta")),
+                                    Str0a3Deta = reader["str0a3_deta"].ToString(),
+                                    Str3a5Deta = reader["str3a5_deta"].ToString(),
+                                    StrMayor7Deta = reader["strMayor7_deta"].ToString(),
+                                    StrRnmascDeta = reader["strRnmasc_deta"].ToString(),
+                                    StrRnfemeDeta = reader["strRnfeme_deta"].ToString(),
+                                    StrPartoNorDeta = reader["strPartoNor_deta"].ToString(),
+                                    StrPartoCesariDeta = reader["strPartoCesari_deta"].ToString(),
+                                    StrUserLog = reader["strUserLog"].ToString(),
+                                    DtFechaLog = reader.IsDBNull(reader.GetOrdinal("dtFechaLog")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("dtFechaLog")),
+                                    StrObs1Deta = reader["strObs1_deta"].ToString(),
+                                    StrObs2Deta = reader["strObs2_deta"].ToString(),
+                                    DecObs1Deta = reader.IsDBNull(reader.GetOrdinal("decObs1_deta")) ? (decimal?)null : reader.GetDecimal(reader.GetOrdinal("decObs1_deta")),
+                                    DecObs2Deta = reader.IsDBNull(reader.GetOrdinal("decObs2_deta")) ? (decimal?)null : reader.GetDecimal(reader.GetOrdinal("decObs2_deta")),
+                                    BitObs1Deta = reader.IsDBNull(reader.GetOrdinal("bitObs1_deta")) ? (bool?)null : reader.GetBoolean(reader.GetOrdinal("bitObs1_deta")),
+                                    BitObs2Deta = reader.IsDBNull(reader.GetOrdinal("bitObs2_deta")) ? (bool?)null : reader.GetBoolean(reader.GetOrdinal("bitObs2_deta")),
+                                    DtObs1Deta = reader.IsDBNull(reader.GetOrdinal("dtObs1_deta")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("dtObs1_deta")),
+                                    DtObs2Deta = reader.IsDBNull(reader.GetOrdinal("dtObs2_deta")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("dtObs2_deta"))
+                                };
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("Error al obtener detalle de historial por alumno: " + ex.Message);
+                    }
+                }
+            }
+
+            return detalle; // Devuelve el detalle encontrado o null si no se encontró ninguno
+        }
+
     }
 }

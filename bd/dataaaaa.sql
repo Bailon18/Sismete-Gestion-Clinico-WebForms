@@ -108,17 +108,19 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[BU_HISTORIAL](
-	[strCod_histo] [varchar](200) NOT NULL,
-	[strCod_alu] [varchar](200) NULL,
-	[strCod_ser] [varchar](200) NULL,
-	[strCod_Car] [varchar](200) NULL,
-	[strCod_matric] [varchar](200) NULL,
+	[strCod_histo] [varchar](200) NOT NULL, -- cod historia
+	[strCod_alu] [varchar](200) NULL, -- cod paciente
+	[strCod_ser] [varchar](200) NULL, -- cod servicio
+	[strCod_Car] [varchar](200) NULL,  -- no
+	[strCod_matric] [varchar](200) NULL, -- no
 	[dtFecha_histo] [date] NULL,
-	[strCod_Sede] [varchar](200) NULL,
-	[strCod_Fac] [varchar](200) NULL,
-	[bitEstado_histo] [bit] NULL,
+	[strCod_Sede] [varchar](200) NULL, -- no
+	[strCod_Fac] [varchar](200) NULL, -- no
+	[bitEstado_histo] [bit] NULL, 
 	[strUserLog] [varchar](200) NULL,
 	[dtFechaLog] [datetime] NULL,
+
+    -- apartir de aqui no se va trabajar
 	[strObs1_histo] [varchar](100) NULL,
 	[strObs2_histo] [varchar](100) NULL,
 	[decObs1_histo] [decimal](7, 2) NULL,
@@ -1242,18 +1244,54 @@ BEGIN
 END
 GO
 
-DECLARE @RowsAffected INT;
-DECLARE @CurrentDate DATETIME = GETDATE();  -- Asignar la fecha actual a una variable
+-- DECLARE @RowsAffected INT;
+-- DECLARE @CurrentDate DATETIME = GETDATE();  -- Asignar la fecha actual a una variable
 
--- Ejecutar el procedimiento almacenado
-EXEC [dbo].[spActualizarDetalleCita]
-    @strCod_detacita = '',  -- NO QUIERO PONER 
-    @strCod_cita = 'CITA-JG38N0',     -- Reemplaza con un código de cita existente
-    @strDescripcion = 'Nueva descripciónasdwdwdw',
-    @strObservaciones = 'Nuevas observaciones',
-    @strUserLog = 'usuario_actual',
-    @dtFechaLog = @CurrentDate,  -- Usar la variable en lugar de llamar directamente a GETDATE()
-    @RowsAffected = @RowsAffected OUTPUT;
+-- -- Ejecutar el procedimiento almacenado
+-- EXEC [dbo].[spActualizarDetalleCita]
+--     @strCod_detacita = '',  -- NO QUIERO PONER 
+--     @strCod_cita = 'CITA-JG38N0',     -- Reemplaza con un código de cita existente
+--     @strDescripcion = 'Nueva descripciónasdwdwdw',
+--     @strObservaciones = 'Nuevas observaciones',
+--     @strUserLog = 'usuario_actual',
+--     @dtFechaLog = @CurrentDate,  -- Usar la variable en lugar de llamar directamente a GETDATE()
+--     @RowsAffected = @RowsAffected OUTPUT;
 
--- Verificar el número de filas afectadas
-SELECT @RowsAffected AS RowsAffected;
+-- -- Verificar el número de filas afectadas
+-- SELECT @RowsAffected AS RowsAffected;
+
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[spGetDetalleHistoByAlumno]') AND type in (N'P', N'PC'))
+BEGIN
+    DROP PROCEDURE [dbo].[spGetDetalleHistoByAlumno]
+END
+GO
+
+CREATE PROCEDURE [dbo].[spGetDetalleHistoByAlumno]
+    @strCod_alu VARCHAR(200)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT * 
+    FROM [dbo].[BU_DETALLEHISTO]
+    WHERE [strCod_alu] = @strCod_alu;
+END
+GO
+
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[spGetHistorialByAlumno]') AND type in (N'P', N'PC'))
+BEGIN
+    DROP PROCEDURE [dbo].[spGetHistorialByAlumno]
+END
+GO
+
+CREATE PROCEDURE [dbo].[spGetHistorialByAlumno]
+    @strCod_alu VARCHAR(200)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT * 
+    FROM [dbo].[BU_HISTORIAL]
+    WHERE [strCod_alu] = @strCod_alu;
+END
+GO

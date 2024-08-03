@@ -32,5 +32,14 @@ namespace SistemaGestionHistorialClinico.Logica
             return historialData.ExisteHistorialParaEstudiante(codigoEstudiante);
         }
 
+        public BU_HISTORIAL ObtenerHistorialPorAlumno(string strCodAlu)
+        {
+            return historialData.GetHistorialByAlumno(strCodAlu);
+        }
+
+        public BU_DetalleHisto ObtenerDetalleHistoPorAlumno(string strCodAlu)
+        {
+            return historialData.GetDetalleHistoByAlumno(strCodAlu);
+        }
     }
 }
