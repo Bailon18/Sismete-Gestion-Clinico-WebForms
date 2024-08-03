@@ -25,7 +25,7 @@ namespace SistemaGestionHistorialClinico.Presentacion
                 string fechaCita = Request.QueryString["fechaCita"];
                 estadoCita = Request.QueryString["estado"];
 
-                Debug.WriteLine($"Estado en initr: {estadoCita}"); // AQUI LLEGA "Atendido"
+                Debug.WriteLine($"Estado en initr: {estadoCita}");
 
                 lblPaciente.Text = paciente;
                 lblServicio.Text = servicio;
@@ -52,7 +52,6 @@ namespace SistemaGestionHistorialClinico.Presentacion
             }
             else
             {
-                // Recuperar el estado desde el ViewState en las solicitudes posteriores
                 estadoCita = ViewState["estadoCita"] as string;
             }
         }
@@ -82,11 +81,10 @@ namespace SistemaGestionHistorialClinico.Presentacion
             {
                 bool result = logica.ActualizarDetalleCita(detalleCita);
 
-                Debug.WriteLine($"resultado : {result}"); 
-
+     
                 if (result)
                 {
-                    Debug.WriteLine($"ingresoooo");
+
                     ScriptManager.RegisterStartupScript(this, GetType(), "guardadoExitoso", @"
                     Swal.fire({
                         title: 'Actualizado',
@@ -106,7 +104,14 @@ namespace SistemaGestionHistorialClinico.Presentacion
                 bool result = logica.GuardarDetalleCita(detalleCita);
                 if (result)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "guardadoExitoso", "Swal.fire('Guardado','Detalle de cita guardado correctamente.','success');", true);
+ 
+                    ScriptManager.RegisterStartupScript(this, GetType(), "guardadoExitoso", @"
+                    Swal.fire({
+                        title: 'Nuevo',
+                        text: 'Detalle de cita guardado correctamente.'
+                    }).then(function() {
+                        window.location.href = 'AtencionMedicina.aspx';
+                    });", true);
                 }
                 else
                 {

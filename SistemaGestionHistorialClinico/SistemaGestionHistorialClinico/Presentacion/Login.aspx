@@ -23,7 +23,7 @@
                 width: auto;
             }
             body {
-                background: url('../Content/fondo.jpg') no-repeat center center fixed;
+                background: url('../Content/fondo2.jpg') no-repeat center center fixed;
                 background-size: cover;
             }
             .overlay {
