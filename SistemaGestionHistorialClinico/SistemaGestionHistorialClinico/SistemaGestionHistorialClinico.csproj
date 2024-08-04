@@ -218,6 +218,7 @@
     <Compile Include="Entidad\dto\AtencionDiaDTO.cs" />
     <Compile Include="Entidad\dto\BU_HistorialDTO.cs" />
     <Compile Include="Entidad\dto\CitaDTO.cs" />
+    <Compile Include="Entidad\dto\PacienteDTO.cs" />
     <Compile Include="Entidad\SIGUTC_CARRERA.cs" />
     <Compile Include="Entidad\SIGUTC_CURSO.cs" />
     <Compile Include="Entidad\SIGUTC_FACULTAD.cs" />

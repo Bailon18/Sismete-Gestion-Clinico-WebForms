@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using SistemaGestionHistorialClinico.Entidad.dto;
 
 namespace SistemaGestionHistorialClinico.Data
 {
@@ -198,6 +199,42 @@ namespace SistemaGestionHistorialClinico.Data
             return persona;
         }
 
+        public List<PacienteDTO> BuscarPersonasPorTexto(string textoBusqueda)
+        {
+            List<PacienteDTO> listaPacientes = new List<PacienteDTO>();
+
+            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+            {
+                SqlCommand comando = new SqlCommand("BuscarEstudiantes", conexion);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.Add(new SqlParameter("@TextoBusqueda", textoBusqueda));
+
+                try
+                {
+                    conexion.Open();
+                    using (SqlDataReader reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            PacienteDTO paciente = new PacienteDTO
+                            {
+                                CodigoAlumno = reader["CodigoAlumno"].ToString(),
+                                ApellidoPaterno = reader["ApellidoPaterno"].ToString(),
+                                ApellidoMaterno = reader["ApellidoMaterno"].ToString(),
+                                Nombre = reader["Nombre"].ToString()
+                            };
+                            listaPacientes.Add(paciente);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al ejecutar el procedimiento almacenado para buscar personas por texto", ex);
+                }
+            }
+
+            return listaPacientes;
+        }
 
 
     }

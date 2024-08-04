@@ -1615,3 +1615,28 @@ BEGIN
     END CATCH
 END
 GO
+
+
+IF OBJECT_ID('dbo.BuscarEstudiantes', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.BuscarEstudiantes;
+GO
+
+CREATE PROCEDURE dbo.BuscarEstudiantes
+    @TextoBusqueda VARCHAR(200)
+AS
+BEGIN
+    SELECT 
+        strCod_alu AS CodigoAlumno,
+        APELLIDO_ALU AS ApellidoPaterno,
+        APELLIDOM_ALU AS ApellidoMaterno,
+        NOMBRE_ALU AS Nombre
+    FROM 
+        SIGUTC_PERSONAL
+    WHERE 
+        (strCod_alu LIKE '%' + @TextoBusqueda + '%' OR
+        APELLIDO_ALU LIKE '%' + @TextoBusqueda + '%' OR
+        APELLIDOM_ALU LIKE '%' + @TextoBusqueda + '%' OR
+        NOMBRE_ALU LIKE '%' + @TextoBusqueda + '%')
+        AND strRol = 'ESTUDIANTE'
+END;
+GO

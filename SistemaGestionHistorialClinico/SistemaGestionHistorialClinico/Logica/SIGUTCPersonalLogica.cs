@@ -5,7 +5,7 @@ using System.Web;
 
 using SistemaGestionHistorialClinico.Data;
 using SistemaGestionHistorialClinico.Entidad;
-
+using SistemaGestionHistorialClinico.Entidad.dto;
 
 namespace SistemaGestionHistorialClinico.Logica
 {
@@ -31,6 +31,11 @@ namespace SistemaGestionHistorialClinico.Logica
         public SIGUTCPERSONAL ValidarCredenciales(string username, string password)
         {
             return personalData.ObtenerPersonalPorCredenciales(username, password);
+        }
+
+        public List<PacienteDTO> BuscarPersonas(string textoBusqueda)
+        {
+            return personalData.BuscarPersonasPorTexto(textoBusqueda);
         }
 
     }

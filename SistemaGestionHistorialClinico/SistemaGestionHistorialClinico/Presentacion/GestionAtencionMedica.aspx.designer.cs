@@ -31,13 +31,40 @@ namespace SistemaGestionHistorialClinico.Presentacion {
         protected global::System.Web.UI.WebControls.DropDownList ddlProfesionales;
         
         /// <summary>
-        /// ddlEstudiantes control.
+        /// txtEstudiante control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEstudiantes;
+        protected global::System.Web.UI.WebControls.TextBox txtEstudiante;
+        
+        /// <summary>
+        /// hfEstudianteCodigo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfEstudianteCodigo;
+        
+        /// <summary>
+        /// hfEstudianteNombreCompleto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfEstudianteNombreCompleto;
+        
+        /// <summary>
+        /// calFechaCita control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar calFechaCita;
         
         /// <summary>
         /// btnConfirmar control.

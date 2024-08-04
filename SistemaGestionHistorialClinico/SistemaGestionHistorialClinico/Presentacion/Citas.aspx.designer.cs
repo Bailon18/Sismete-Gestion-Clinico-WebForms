@@ -11,5 +11,32 @@ namespace SistemaGestionHistorialClinico.Presentacion {
     
     
     public partial class Citas {
+        
+        /// <summary>
+        /// calendarioCitas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar calendarioCitas;
+        
+        /// <summary>
+        /// lblFechaSeleccionada control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFechaSeleccionada;
+        
+        /// <summary>
+        /// gvCitas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvCitas;
     }
 }

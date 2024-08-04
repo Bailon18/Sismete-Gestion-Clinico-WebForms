@@ -23,7 +23,22 @@ namespace SistemaGestionHistorialClinico.Presentacion
         {
             if (!IsPostBack)
             {
-                hfFechaLog.Value = DateTime.Now.ToString("yyyy-MM-dd");
+                //hfFechaLog.Value = DateTime.Now.ToString("yyyy-MM-dd");
+                string fechaCita = Request.QueryString["fechaCita"];
+                if (!string.IsNullOrEmpty(fechaCita))
+                {
+                    DateTime parsedDate;
+                    if (DateTime.TryParse(fechaCita, out parsedDate))
+                    {
+                        hfFechaLog.Value = parsedDate.ToString("yyyy-MM-dd HH:mm:ss");
+                    }
+                    else
+                    {
+             
+                        hfFechaLog.Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+             
+                    }
+                }
 
                 if (!string.IsNullOrEmpty(Request.QueryString["estudianteCod"]) && !string.IsNullOrEmpty(Request.QueryString["estudianteNombreCompleto"]))
                 {
@@ -106,7 +121,7 @@ namespace SistemaGestionHistorialClinico.Presentacion
                 strCod_cita = nuevoCodigoCita,
                 strCod_alu = hfEstudianteCod.Value,
                 strCod_ser = hfServicioCod.Value,
-                dtFecha_cita = DateTime.Now,
+                dtFecha_cita = DateTime.Parse(hfFechaLog.Value),
                 strEstado_cita = "Pendiente",
                 strUserLog = hfUserLog.Value,
                 dtFechaLog = DateTime.Now
